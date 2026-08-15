@@ -1,0 +1,25 @@
+{
+  "name": "whimsymusicplayer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maggie-e-matthias/MusicPlayer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/maggie-e-matthias/MusicPlayer/issues"
+  },
+  "homepage": "https://github.com/maggie-e-matthias/MusicPlayer#readme",
+  "devDependencies": {
+    "electron": "^43.4.0",
+    "electron-reload": "^2.0.0-alpha.1"
+  }
+}
