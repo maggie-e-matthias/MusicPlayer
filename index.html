@@ -2,12 +2,10 @@
 <html lang="en">
     <head>
         <title>Music Player</title>
-
-    </head>
-    <body>
         <!--Style-->
         <link rel="stylesheet" href="style.css">
-
+    </head>
+    <body>
         <!-- App Content -->
         <div class="app" style="-webkit-app-region: drag;">
             
@@ -18,13 +16,12 @@
 
                 <!-- Title Bar Buttons -->
                 <div class="title-bar-btns">
-
-                    <!-- Go Back button -->
-                    <button class="title-bar-btn" id="go-back">
+                    <!-- Menu button -->
+                    <button class="title-bar-btn" id="menu">
                         <!-- Insert img asset -->
                     </button>
-                    <!-- Go Forward button -->
-                    <button class="title-bar-btn" id="go-forward">
+                    <!-- Now Playing button -->
+                    <button class="title-bar-btn" id="now-playing">
                         <!-- Insert img asset -->
                     </button>
                     <!-- Minimize button-->
@@ -40,31 +37,39 @@
                 </div>
             </div>
 
-            <!-- Playing Track Zone -->
-            <div class="track-zone">
-                <!-- Insert img's for tracks -->
-                
-                <!-- Track Info -->
-                <div class="track-info">
-                    <h2 id="track-name">Track Name</h2>
-                    <h3 id="track-artist">Artist</h3>
+            <!-- Now Playing Tab (Default) -->
+            <div class="tab" id="now-playing">
+                <!-- Playing Track Zone -->
+                <div class="track-zone">
+                    <!-- Insert img's for tracks -->
+                    
+                    <!-- Track Info -->
+                    <div class="track-info">
+                        <h2 id="track-name">Track Name</h2>
+                        <h3 id="track-artist">Artist</h3>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="control-btns">
+                    <!-- Previous Button -->
+                    <button class="control-btn" id="previous">
+                        <!-- Insert img asset -->
+                    </button>
+                    <!-- Play/Pause Button -->
+                    <button class="control-btn" id="play">
+                        <!-- Insert img asset -->
+                    </button>
+                    <!-- Next Button -->
+                    <button class="control-btn" id="next">
+                        <!-- Insert img asset -->
+                    </button>
                 </div>
             </div>
 
-            <!-- Control Buttons -->
-            <div class="control-btns">
-                <!-- Previous Button -->
-                <button class="control-btn" id="previous">
-                    <!-- Insert img asset -->
-                </button>
-                <!-- Play/Pause Button -->
-                <button class="control-btn" id="play">
-                    <!-- Insert img asset -->
-                </button>
-                <!-- Next Button -->
-                <button class="control-btn" id="next">
-                    <!-- Insert img asset -->
-                </button>
+            <!-- Menu Tab -->
+            <div class="tab" id="menu">
+                <p id="place-holder">Nothing to see here, yet.</p>
             </div>
         </div>
 
