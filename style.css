@@ -36,7 +36,8 @@ html, body {
 }
 
 #some-title {
-    justify-content: left;
+    font-weight: bold;
+    font-size: large;
 }
 
 .title-bar-btns{
@@ -53,8 +54,14 @@ html, body {
 /* Now Playing Tab (Main) */
 
 .seek-bar{
+    width: 100%;
+    max-width: 18rem;
+    height: 100%;
+    max-height: 18rem;
     display: flex;
-    flex-direction: row;
-    gap: 0px;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #e3d5e6;
+    background: #5e1e50;
 }
 
