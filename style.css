@@ -18,7 +18,6 @@ html, body {
     height: 100%;
     display: flex;
     flex-direction: column; /* Stacks childer on top of each other */
-    justify-content: center;
     background: #c6a6ce;
     font-family: 'Courier New', Courier, monospace;
 }
@@ -28,10 +27,20 @@ html, body {
 .title-bar{
     background-color: #af7fc9;
     font-family: 'Courier New', Courier, monospace;
-    align-items: center;
-    justify-content: right;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 100%; 
+    height: 25px;
+    padding: 5px 10px;
+}
+
+#some-title {
+    justify-content: left;
+}
+
+.title-bar-btns{
+    justify-content: right;
 }
 
 /* Tabs */
