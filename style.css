@@ -53,6 +53,8 @@ html, body {
 
 /* Now Playing Tab (Main) */
 
+
+
 .seek-bar{
     width: 100%;
     max-width: 18rem;
@@ -65,3 +67,8 @@ html, body {
     background: #5e1e50;
 }
 
+/* Menu tab */
+
+#menu-tab{
+    display: none;
+}
