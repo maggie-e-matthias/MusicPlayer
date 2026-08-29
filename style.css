@@ -54,6 +54,9 @@ button {
 .tab{
     background-color: #c6a6ce;
     font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Now Playing Tab (Main) */
@@ -62,12 +65,30 @@ button {
 
 .seek-bar{
     width: 100%;
-    height: 1rem;
+    max-width: 18rem;
+    height: 100%;
+    height: 0.6rem;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: left;
     align-items: center;
-    border:3px solid #dabacc;
-    background: #5e1e50;
+    border:2px solid #dabacc;
+    border-radius: 8px;
+    background: #85347a;
+    margin: 0.25rem;
+    position: relative;
+}
+
+#seek-cursor{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0%;
+    background: #85347a;
+    border: 3px solid #dabacc;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 0.625rem;
 }
 
 .timer {
