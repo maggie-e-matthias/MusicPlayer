@@ -61,7 +61,33 @@ button {
 
 /* Now Playing Tab (Main) */
 
+/* Track zone */
 
+.track-zone{
+    display: flex;
+    flex-direction: column;
+}
+
+#track-zone-place-holder{
+    background-color: #af7fc9;
+    border: 2px solid #dabacc;
+    border-radius: 8px;
+    width: 12rem;
+    height: 12rem;
+    padding: 1rem 1rem;
+    margin: 1rem;
+
+}
+
+.track-info{
+    align-self: flex-start;
+    justify-content: left;
+    color:#32073c;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Seek bar */
 
 .seek-bar{
     width: 100%;
