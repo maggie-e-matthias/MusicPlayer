@@ -41,13 +41,13 @@ menuBtn.addEventListener("click",
 
 async function loadTracks(){
     const tracks = await ipcRenderer.invoke('get-tracks');
-    const tracksTab = document.getElementById('tracks-tab');
+    const tracksList = document.getElementById('track-list');
 
     for (const track of tracks) {
         const trackElement = document.createElement('div');
         trackElement.className = 'a-track';
         trackElement.textContent = track.title + " - " + track.artist;
-        tracksTab.appendChild(trackElement);
+        tracksList.appendChild(trackElement);
     }
 }
 
