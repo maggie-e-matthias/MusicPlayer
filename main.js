@@ -27,11 +27,13 @@ function createWindow(){
     ipcMain.on('window:close', () => win.close());
     
 
-    // Do the scanning of data
+    // Track data ipc handler
 
-    scanMusicFolder().then(tracks =>{
-        console.log(tracks);
+    ipcMain.handle('get-tracks', async () => {
+        const tracks = await scanMusicFolder();
+        return tracks;
     });
+
 }
 
 app.whenReady().then(createWindow);
