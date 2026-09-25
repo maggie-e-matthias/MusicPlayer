@@ -20,6 +20,9 @@ const menuTab = document.getElementById("menu-tab");
 const nowPlayingBtn = document.getElementById("now-playing");
 const menuBtn = document.getElementById("menu");
 
+
+// Tab Changing
+
 nowPlayingBtn.addEventListener("click",
     function(){
         menuTab.style.display = "none";
@@ -31,3 +34,21 @@ menuBtn.addEventListener("click",
         nowPlayingTab.style.display = "none";
         menuTab.style.display = "flex";
 });
+
+
+ 
+// Track elements
+
+async function loadTracks(){
+    const tracks = await ipcRenderer.invoke('get-tracks');
+    const tracksTab = document.getElementById('tracks-tab');
+
+    for (const track of tracks) {
+        const trackElement = document.createElement('div');
+        trackElement.className = 'a-track';
+        trackElement.textContent = track.title + " - " + track.artist;
+        tracksTab.appendChild(trackElement);
+    }
+}
+
+loadTracks();
