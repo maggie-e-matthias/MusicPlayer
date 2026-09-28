@@ -164,10 +164,15 @@ button {
 }
 
 .a-track {
+  height: 2rem;
+  width: 100%;
   border: 1px solid #dabacc;
   background-color: #b494bc;
   padding: 0.25rem;
   font-weight: bold;
   text-decoration-color: #32073c;
   
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
