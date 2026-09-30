@@ -34,30 +34,78 @@ menuBtn.addEventListener("click", function () {
 
 const { pathToFileURL } = require("url");
 
-async function loadTracks() {
-  const tracks = await ipcRenderer.invoke("get-tracks");
-  const tracksList = document.getElementById("track-list");
+// Audio variables
 
-  for (const track of tracks) {
+let tracks = []; // Array of all the tracks scanned
+let audio = new Audio(); // The currently playing audio
+let currentIndex = -1; // Tracks array index
+let isPlaying = false; // Play/Pause state
+
+const tracksList = document.getElementById("track-list");
+const trackNameE = document.getElementById("track-name");
+const trackArtist = document.getElementById("track-artist");
+
+// Scan tracks from device
+async function loadTracks() {
+  tracks = await ipcRenderer.invoke("get-tracks");
+
+  tracks.forEach((track, index) => {
     const trackElement = document.createElement("button");
     trackElement.className = "a-track";
+    trackElement.dataset.index = index;
     trackElement.textContent = track.title + " \n " + track.artist;
     tracksList.appendChild(trackElement);
-
-    //Play when clicked
-    trackElement.addEventListener("click", () => {
-      const audio = new Audio(pathToFileURL(track.filePath).href);
-
-      audio
-        .play()
-        .then(() => {
-          console.log("Now playing" + track.title);
-        })
-        .catch((error) => {
-          console.error("Playing failed", error);
-        });
-    });
-  }
+  });
 }
 
+// Event listener for all tracks 
+tracksList.addEventListener("click", (event) => {
+  const button = event.target.closest(".a-track");
+  if(!button) return;
+  playTrack(Number(button.dataset.index));
+});
+
+// Play the music 
+
+function playTrack(index){
+  // If same track is clicked again, just toggle
+  if (index === currentIndex){
+    togglePlayPause();
+    return;
+  }
+
+  // If a different track is playing (or nothing at all), just Play
+  const track = tracks[index];
+  audio.pause();
+  audio.src = pathToFileURL(track.filePath).href; 
+  audio.play().catch((error) => console.error("Failed to play", error));
+
+  currentIndex = index;
+  isPlaying = true; 
+  updateNowPlaying(track);
+}
+
+function togglePlayPause() {
+  if (currentIndex === -1) return; // No tracks available
+  if (isPlaying){
+    audio.pause();
+  }else {
+    audio.play();
+  }
+
+  isPlaying = !isPlaying;
+}
+
+function updateNowPlaying(track){
+  trackNameE.textContent = track.title;
+  trackArtist.textContent = track.artist;
+}
+
+// Update on track finishes
+audio.addEventListener("ended", () => {
+  isPlaying = false;
+});
+
+// Toggle play/pause button 
+document.getElementById("play").addEventListener("click", togglePlayPause);
 loadTracks();
