@@ -106,6 +106,20 @@ audio.addEventListener("ended", () => {
   isPlaying = false;
 });
 
-// Toggle play/pause button 
-document.getElementById("play").addEventListener("click", togglePlayPause);
+// Control buttons on Now-Playing
+
+const playPauseBtn = document.getElementById("play").addEventListener("click", togglePlayPause);
+const nextBtn = document.getElementById("next");
+const previousBtn = document.getElementById("previous");
+const loopBtn = document.getElementById("loop-control");
+
+const loopStates = Object.freeze({
+  REPEAT_ONE: "REPEAT_ONE",
+  REPEAT_ALL: "REPEAT_ALL",
+  SHUFFLE: "SHUFFLE"
+})
+
+
+
+
 loadTracks();
