@@ -163,5 +163,40 @@ loopBtn.addEventListener("click", () => {
   }
 });
 
+nextBtn.addEventListener("click", () => {
+  switch(currentState) {
+    case loopState.REPEAT_ONE:
+      audio.currentTime = 0;
+      audio.play();
+      isPlaying = true;
+      break;
+
+    case loopState.REPEAT_ALL:
+      playTrack((currentIndex + 1) % tracks.length);
+      break;
+
+    case loopState.SHUFFLE:
+      playTrack(Math.floor(Math.random() * tracks.length));
+      break;
+  }
+});
+
+previousBtn.addEventListener("click", () => {
+    switch(currentState) {
+    case loopState.REPEAT_ONE:
+      audio.currentTime = 0;
+      audio.play();
+      isPlaying = true;
+      break;
+
+    case loopState.REPEAT_ALL:
+      playTrack((currentIndex - 1) % tracks.length);
+      break;
+
+    case loopState.SHUFFLE:
+      playTrack(Math.floor(Math.random() * tracks.length));
+      break;
+  }
+});
 
 loadTracks();
