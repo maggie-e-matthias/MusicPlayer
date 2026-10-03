@@ -89,8 +89,10 @@ function togglePlayPause() {
   if (currentIndex === -1) return; // No tracks available
   if (isPlaying) {
     audio.pause();
+    playPauseBtn.textContent = "▶️";
   } else {
     audio.play();
+    playPauseBtn.textContent = "⏸️";
   }
 
   isPlaying = !isPlaying;
@@ -125,12 +127,12 @@ audio.addEventListener("ended", () => {
 
 // Control buttons on Now-Playing
 
-const playPauseBtn = document
-  .getElementById("play")
-  .addEventListener("click", togglePlayPause);
+const playPauseBtn = document.getElementById("play");
 const nextBtn = document.getElementById("next");
 const previousBtn = document.getElementById("previous");
 const loopBtn = document.getElementById("loop-control");
+
+playPauseBtn.addEventListener("click", togglePlayPause);
 
 const loopState = Object.freeze({
   REPEAT_ONE: "REPEAT_ONE",
