@@ -58,18 +58,18 @@ async function loadTracks() {
   });
 }
 
-// Event listener for all tracks 
+// Event listener for all tracks
 tracksList.addEventListener("click", (event) => {
   const button = event.target.closest(".a-track");
-  if(!button) return;
+  if (!button) return;
   playTrack(Number(button.dataset.index));
 });
 
-// Play the music 
+// Play the music
 
-function playTrack(index){
+function playTrack(index) {
   // If same track is clicked again, just toggle
-  if (index === currentIndex){
+  if (index === currentIndex) {
     togglePlayPause();
     return;
   }
@@ -77,49 +77,89 @@ function playTrack(index){
   // If a different track is playing (or nothing at all), just Play
   const track = tracks[index];
   audio.pause();
-  audio.src = pathToFileURL(track.filePath).href; 
+  audio.src = pathToFileURL(track.filePath).href;
   audio.play().catch((error) => console.error("Failed to play", error));
 
   currentIndex = index;
-  isPlaying = true; 
+  isPlaying = true;
   updateNowPlaying(track);
 }
 
 function togglePlayPause() {
   if (currentIndex === -1) return; // No tracks available
-  if (isPlaying){
+  if (isPlaying) {
     audio.pause();
-  }else {
+  } else {
     audio.play();
   }
 
   isPlaying = !isPlaying;
 }
 
-function updateNowPlaying(track){
+function updateNowPlaying(track) {
   trackNameE.textContent = track.title;
   trackArtist.textContent = track.artist;
 }
 
-// Update on track finishes
+// Updates based on loop state 
 audio.addEventListener("ended", () => {
   isPlaying = false;
+
+  // loop logic 
+  switch (currentState) {
+    case loopState.REPEAT_ONE:
+      audio.currentTime = 0;
+      audio.play();
+      isPlaying = true;
+      break;
+
+    case loopState.REPEAT_ALL:
+      playTrack((currentIndex + 1) % tracks.length);
+      break;
+
+    case loopState.SHUFFLE:
+      playTrack(Math.floor(Math.random() * tracks.length));
+      break;
+  }
 });
 
 // Control buttons on Now-Playing
 
-const playPauseBtn = document.getElementById("play").addEventListener("click", togglePlayPause);
+const playPauseBtn = document
+  .getElementById("play")
+  .addEventListener("click", togglePlayPause);
 const nextBtn = document.getElementById("next");
 const previousBtn = document.getElementById("previous");
 const loopBtn = document.getElementById("loop-control");
 
-const loopStates = Object.freeze({
+const loopState = Object.freeze({
   REPEAT_ONE: "REPEAT_ONE",
   REPEAT_ALL: "REPEAT_ALL",
-  SHUFFLE: "SHUFFLE"
-})
+  SHUFFLE: "SHUFFLE",
+});
 
+// Initial state for looping
 
+let currentState = loopState.REPEAT_ALL;
+
+// Changes loop state based on loopBtn clicks
+
+loopBtn.addEventListener("click", () => {
+  switch (currentState){
+    case loopState.REPEAT_ALL:
+      currentState = loopState.SHUFFLE;
+      loopBtn.textContent = "🔀";
+      break;
+    case loopState.SHUFFLE:
+      currentState = loopState.REPEAT_ONE;
+      loopBtn.textContent = "🔂";
+      break;
+    case loopState.REPEAT_ONE:
+      currentState = loopState.REPEAT_ALL;
+      loopBtn.textContent = "🔁​";
+      break;
+  }
+});
 
 
 loadTracks();
